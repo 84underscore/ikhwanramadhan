@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Green — Portfolio</title>
+  <meta name="description" content="Portfolio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050b08;
+      --bg-soft: #08130d;
+      --card: rgba(255, 255, 255, 0.035);
+      --border: rgba(74, 222, 128, 0.16);
+      --green: #22c55e;
+      --green-soft: #4ade80;
+      --mint: #a7f3d0;
+      --text: #e8f5ee;
+      --muted: #9db4a8;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --radius: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(700px 500px at 85% -5%, rgba(34, 197, 94, 0.16), transparent 60%),
+        radial-gradient(600px 500px at 10% 20%, rgba(16, 185, 129, 0.10), transparent 65%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      inset: 18px 0 auto;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(5, 11, 8, 0.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 18px var(--green);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--mint);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      border: 1px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), #16a34a);
+      color: #04150b;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.35);
+    }
+
+    .btn-ghost {
+      border-color: var(--border);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(74, 222, 128, 0.45);
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 130px;
+      padding-bottom: 80px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(34, 197, 94, 0.08);
+      color: var(--mint);
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3rem, 7vw, 5.4rem);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, var(--mint), var(--green-soft), var(--green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.7rem;
+      color: var(--mint);
+    }
+
+    .stat span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      position: relative;
+      border: 1px solid var(--border);
+      background: linear-gradient(160deg, rgba(34, 197, 94, 0.10), rgba(255, 255, 255, 0.02));
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .profile {
+      height: 340px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(34, 197, 94, 0.28), rgba(5, 11, 8, 0.9)),
+        url("https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=80") center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 22px;
+    }
+
+    .profile-info {
+      background: rgba(5, 11, 8, 0.72);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      padding: 16px 20px;
+      border-radius: 18px;
+      width: 100%;
+    }
+
+    .profile-info h3 {
+      font-size: 1.05rem;
+    }
+
+    .profile-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .floating-badge {
+      position: absolute;
+      right: -14px;
+      top: 32px;
+      padding: 12px 18px;
+      border-radius: 16px;
+      background: rgba(5, 11, 8, 0.9);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      font-size: 0.82rem;
+      color: var(--mint);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Sections */
+    section {
+      padding: 110px 0;
+    }
+
+    .section-head {
+      max-width: 640px;
+      margin-bottom: 54px;
+    }
+
+    .section-label {
+      color: var(--green-soft);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin: 12px 0 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      color: var(--muted);
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .about-card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+
+    .skill {
+      margin-bottom: 22px;
+    }
+
+    .skill-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.92rem;
+      margin-bottom: 9px;
+    }
+
+    .bar {
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--green), var(--mint));
+      width: 0;
+      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project {
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-8px);
+      border-color: rgba(74, 222, 128, 0.45);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .project-image {
+      height: 190px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .project-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5, 11, 8, 0.15), rgba(5, 11, 8, 0.85));
+    }
+
+    .project-body {
+      padding: 24px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.74rem;
+      color: var(--mint);
+      border: 1px solid var(--border);
+      background: rgba(34, 197, 94, 0.08);
+      padding: 5px 11px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .project h3 {
+      font-size: 1.18rem;
+      margin-bottom: 8px;
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .project-link {
+      color: var(--green-soft);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Contact */
+    .contact-box {
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      padding: 56px;
+      text-align: center;
+      background:
+        radial-gradient(500px 250px at 50% 0%, rgba(34, 197, 94, 0.16), transparent 70%),
+        var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    footer {
+      padding: 34px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      .contact-box {
+        padding: 36px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">
+        <span class="logo-dot"></span>
+        Alex<span style="color: var(--green-soft)">.dev</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#about">Tentang</a>
+        <a href="#skills">Keahlian</a>
+        <a href="#projects">Proyek</a>
+        <a href="#contact">Kontak</a>
+      </div>
+
+      <a href="#contact" class="btn btn-primary">Hubungi Saya</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">● Tersedia untuk proyek freelance</span>
+        <h1>
+          Membangun pengalaman desain yang <span class="gradient-text">modern</span>
+        </h1>
+        <p>
+          Saya Ikhwan Ramadhan dari XII Desain Grafis.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">Lihat Proyek</a>
+          <a href="#contact" class="btn btn-ghost">Unduh CV</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>5+</strong>
+            <span>Tahun Pengalaman</span>
+          </div>
+          <div class="stat">
+            <strong>40+</strong>
+            <span>Proyek Selesai</span>
+          </div>
+          <div class="stat">
+            <strong>25+</strong>
+            <span>Klien Puas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card reveal">
+        <div class="floating-badge">✦ UI/UX & Frontend</div>
+        <div class="profile">
+          <div class="profile-info">
+            <h3>Ikhwan Ramadhan</h3>
+            <p>Web Developer · UI Designer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-label">Tentang Saya</span>
+        <h2>hai</h2>
+        <p>
+          Saya membantu bisnis dan personal brand tampil profesional melalui website
+          yang responsif, cepat, dan memiliki identitas visual yang kuat.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card reveal">
+          <h3>Keahlian Utama</h3>
+          <p style="color: var(--muted); margin-bottom: 26px;">
+            Fokus pada hi.
+          </p>
+
+          <div class="skill">
+            <div class="skill-top"><span>HTML & CSS</span><span>95%</span></div>
+            <div class="bar"><span data-width="95%"></span></div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-top"><span>JavaScript</span><span>88%</span></div>
+            <div class="bar"><span data-width="88%"></span></div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-top"><span>UI/UX Design</span><span>90%</span></div>
+            <div class="bar"><span data-width="90%"></span></div>
+          </div>
+
+          <div class="skill" style="margin-bottom: 0;">
+            <div class="skill-top"><span>React</span><span>82%</span></div>
+            <div class="bar"><span data-width="82%"></span></div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 16px;">
+            hi.
+          </h3>
+          <p style="color: var(--muted);">
+            Setiap proyek saya kerjakan. [7]
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-label">Layanan</span>
+        <h2>Apa yang bisa saya bantu</h2>
+      </div>
+
+      <div class="projects">
+        <article class="project reveal">
+          <div class="project-body">
+            <span class="tag">Web Development</span>
+            <h3>Website Company Profile</h3>
+            <p>Website profesional, responsif, dan siap digunakan untuk meningkatkan kredibilitas bisnis.</p>
+            <a href="#" class="project-link">Pelajari lebih lanjut →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-body">
+            <span class="tag">UI/UX Design</span>
+            <h3>Desain Landing Page</h3>
+            <p>Desain modern dengan hierarki visual yang jelas untuk meningkatkan konversi pengunjung.</p>
+            <a href="#" class="project-link">Pelajari lebih lanjut →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-body">
+            <span class="tag">Frontend</span>
+            <h3>Dashboard Admin</h3>
+            <p>Dashboard yang rapi, mudah digunakan, dan dibangun dengan komponen yang dapat digunakan ulang.</p>
+            <a href="#" class="project-link">Pelajari lebih lanjut →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-label">Portofolio</span>
+        <h2>Proyek pilihan</h2>
+        <p>Beberapa karya yang menunjukkan pendekatan saya dalam desain dan pengembangan web.</p>
+      </div>
+
+      <div class="projects">
+        <article class="project reveal">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="project-body">
+            <span class="tag">Dashboard</span>
+            <h3>Green Analytics</h3>
+            <p>Dashboard analitik modern dengan visualisasi data dan tampilan gelap yang elegan.</p>
+            <a href="#" class="project-link">Lihat detail →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="project-body">
+            <span class="tag">Landing Page</span>
+            <h3>Eco Startup</h3>
+            <p>Landing page untuk startup lingkungan dengan nuansa hijau dan struktur konten yang jelas.</p>
+            <a href="#" class="project-link">Lihat detail →</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="project-body">
+            <span class="tag">E-Commerce</span>
+            <h3>Nature Store</h3>
+            <p>Toko online minimalis dengan fokus pada produk, kecepatan, dan pengalaman belanja yang nyaman.</p>
+            <a href="#" class="project-link">Lihat detail →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box reveal">
+        <span class="section-label">Kontak</span>
+        <h2 style="margin-top: 12px;">Punya ide proyek?<br />Mari wujudkan bersama.</h2>
+        <p style="color: var(--muted); max-width: 560px; margin-inline: auto;">
+          Kirim pesan untuk diskusi mengenai website, desain UI, atau kebutuhan pengembangan digital lainnya.
+        </p>
+
+        <div class="contact-actions">
+          <a href="no" class="btn btn-primary">Kirim Email</a>
+          <a href="no" class="btn btn-ghost">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Ikhwan Ramadhan. Dibuat dengan HTML, CSS, dan JavaScript.
+    </div>
+  </footer>
+
+  <script>
+    // Tahun otomatis
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Animasi muncul saat scroll
+    const revealItems = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    // Animasi skill bar
+    const skillBars = document.querySelectorAll(".bar span");
+
+    const skillObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.width = entry.target.dataset.width;
+            skillObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    skillBars.forEach((bar) => skillObserver.observe(bar));
+  </script>
+</body>
+</html>
